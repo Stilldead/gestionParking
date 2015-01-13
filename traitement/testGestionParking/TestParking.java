@@ -7,8 +7,12 @@ import org.junit.Test;
 public class TestParking {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testPark1() {
+		
 	}
-
+	
+	public final void testFindByType() throws Exception 
+	{
+        
+	}
 }
