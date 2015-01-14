@@ -1,0 +1,12 @@
+PlaceOccupeeException 		= Mauvais type ou place déjà prise.
+PlaceNumero 			= Place numero 
+EtDeType 			=  et de type 
+PlaceOccupéCarac 		=     La place est occupee par la voiture comportant les caracteristiques suivantes : 
+Plaque 				=     Plaque : 
+Marque 				= ; marque : 
+Proprio 			= ; Proprietaire : 
+Type 				= ; type : 
+SelectionPlaceUnpark		= Selectionner la place de la voiture à unpark
+PlaceVide			= La place est vide
+PlaceDisponibleException	= PlaceDisponibleException
+
