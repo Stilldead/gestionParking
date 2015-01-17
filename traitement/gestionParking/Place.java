@@ -9,6 +9,15 @@ public class Place {
 	boolean estOccupee;
 	String typePlace;
 	Vehicule vehicule;
+	
+	public Place( int num, boolean reservee, boolean occupee, String type, Vehicule ptrVehicule)
+	{
+		numero = num;
+		estReservee = reservee;
+		estOccupee = occupee;
+		typePlace = type;
+		vehicule =ptrVehicule;
+	}
 
 	public boolean getEstOccupee()
 	{
@@ -18,6 +27,11 @@ public class Place {
 	public String getType()
 	{
 		return typePlace;
+	}
+	
+	public void setType(String type)
+	{
+		typePlace = type;
 	}
 
 	public int getNumero(){

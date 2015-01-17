@@ -9,9 +9,24 @@ import exception.PlusAucunePlaceException;
 import véhicule.Vehicule;
 
 public class Parking {
+	static int nombrePlace;
+	static ArrayList<Place> listePlace = new ArrayList();
+	static Parking INSTANCE = null;
 	
-	ArrayList<Place> listePlace = new ArrayList();
-
+	public static Parking getInstance()
+	{
+		if(INSTANCE == null)
+		{
+			INSTANCE = new Parking(10);
+		}
+		return INSTANCE;
+		
+	}
+	public Parking(int nbPlace)
+	{
+		nombrePlace = nbPlace;
+	}
+	
 	public boolean vehiculeExiste(){
 		
 		
@@ -19,9 +34,12 @@ public class Parking {
 		
 	}
 	
-	public void intialiserListeTest()
+	public void intialiserListe()
 	{
-		listePlace.add(new Place());
+		for (int i = 0; i < nombrePlace ; ++i)
+		{
+			listePlace.add(new Place(nombrePlace, false, false, "Particulier", null));
+		}
 	}
 	
 	public ArrayList<Place> getListePlace()
@@ -34,19 +52,25 @@ public class Parking {
 	{
 		try	
 		{
+			//Vérifie si la place est occupée et si c'est le bon type de place.
 			if(listePlace.get(numero_place).getEstOccupee() || listePlace.get(numero_place).getType() != vehicule.getType())
 			{
 				int cpt = 0;
+				//Si la place est occupée ou que ce n'est pas le bon type, cherche une place libre même chez les transporteurs.
 				for (int i = 0 ; listePlace.size()<=i ; ++i)
 				{
-					if (listePlace.get(i).getType() == "Transporteur" && !listePlace.get(i).getEstOccupee())
+					if (listePlace.get(i).getType() == "Transporteur" && !(listePlace.get(i).getEstOccupee()))
 						cpt++;
 				}
-				if(cpt!=0)
+				if (cpt!=0)
 					throw new PlaceOccupeeException("Mauvais type ou place déjà prise.");
+				
+				return false;
 			}
+			//La place est libre et le vehicule est du bon type, on le place donc.
+			listePlace.get(numero_place).setVehicule(vehicule);
+			return true;			
 			
-			listePlace.get(numero_place -1).setVehicule(vehicule);
 		}
 		catch(PlaceOccupeeException e)
 		{
