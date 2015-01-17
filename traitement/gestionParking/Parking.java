@@ -6,7 +6,7 @@ import java.util.Scanner;
 import exception.PlaceLibreException;
 import exception.PlaceOccupeeException;
 import exception.PlusAucunePlaceException;
-import véhicule.Vehicule;
+import vehicule.Vehicule;
 
 public class Parking {
 	static int nombrePlace;
@@ -27,18 +27,11 @@ public class Parking {
 		nombrePlace = nbPlace;
 	}
 	
-	public boolean vehiculeExiste(){
-		
-		
-		return true;
-		
-	}
-	
 	public void intialiserListe()
 	{
-		for (int i = 0; i < nombrePlace ; ++i)
+		for (int i = 0; i <= nombrePlace ; ++i)
 		{
-			listePlace.add(new Place(nombrePlace, false, false, "Particulier", null));
+			listePlace.add(new Place(i, false, false, "Particulier", null));
 		}
 	}
 	
@@ -50,8 +43,12 @@ public class Parking {
 
 	public boolean park(Vehicule vehicule, int numero_place)
 	{
+		if (listePlace.size() < numero_place)
+			return false;
 		try	
 		{
+			
+			
 			//Vérifie si la place est occupée et si c'est le bon type de place.
 			if(listePlace.get(numero_place).getEstOccupee() || listePlace.get(numero_place).getType() != vehicule.getType())
 			{
@@ -69,6 +66,7 @@ public class Parking {
 			}
 			//La place est libre et le vehicule est du bon type, on le place donc.
 			listePlace.get(numero_place).setVehicule(vehicule);
+			listePlace.get(numero_place).setEstOccupee(true);
 			return true;			
 			
 		}
@@ -82,7 +80,7 @@ public class Parking {
 
 	public void etatParking () {
 		for (int i = 0; i < listePlace.size(); ++i) {
-			System.out.println("Place numero " + listePlace.get(i).getNumero() + " et de type " + listePlace.get(i).getType() + "." + "\n");
+			System.out.println("Place numero " + listePlace.get(i).getNumero() + " est de type " + listePlace.get(i).getType() + "." + "\n");
 			if (listePlace.get(i).getEstOccupee()) {
 				System.out.println("    La place est occupee par la voiture comportant les caracteristiques suivantes : " + "\n");
 				System.out.println("    Plaque : " + 		listePlace.get(i).getVehicule().getNumeroImmatriculation() + 		
@@ -95,40 +93,42 @@ public class Parking {
 	
 	public Place bookPlace () {
 		try {
-			for (int i = 0; i < listePlace.size(); ++i) {
+			for (int i = 0;i <= listePlace.size() ; ++i) {
+				
 				if (listePlace.get(i).getEstReservee() == false && listePlace.get(i).getEstOccupee() == false) {
 					listePlace.get(i).setEstReservee(true);
-					return listePlace.get(i);
+					return listePlace.get(0);
 				}
 			}
 			
-			throw new PlusAucunePlaceException("");
+			throw new PlusAucunePlaceException("Plus aucune place Disponible.");
 		}
 		
 		catch(PlusAucunePlaceException e) {
 			e.printStackTrace();
-		} return null;
+		}
+		finally
+		{
+			return null;
+		}
 	}
 
-	public Vehicule unpark(int numero_place){
-		
+	public Vehicule unpark(int numero_place){		
 		Vehicule vehicule = listePlace.get(numero_place).getVehicule();
-		
 		try {
-	
-			System.out.println("Selectionner la place de la voiture à unpark");
-								
-			if(numero_place == listePlace.size() && vehiculeExiste() && listePlace.get(numero_place).getEstOccupee()) 
-				listePlace.get(numero_place).setVehicule(null);					
-			
-			throw new PlaceLibreException("La place est vide");	
-							
+			if(vehiculeExiste(listePlace.get(numero_place).getVehicule()) && listePlace.get(numero_place).getEstOccupee()) 
+			{
+				listePlace.get(numero_place).setVehicule(null);
+				return vehicule;
+			}
+			else
+				throw new PlaceLibreException("La place est vide");	
 		}			
 		catch (PlaceLibreException e){
 			
 			e.printStackTrace();
 		}
-		return vehicule;
+		return null;
 		
 	}
 	
@@ -146,7 +146,7 @@ public class Parking {
 	public int getLocation (String plaque) {
 		
 		for (int i = 0; i < listePlace.size(); ++i) {
-			if (listePlace.get(i).getVehicule().getNumeroImmatriculation() == plaque)
+			if (listePlace.get(i).getVehicule() != null && listePlace.get(i).getVehicule().getNumeroImmatriculation() == plaque)
 				return i;
 		}
 		return -1;

@@ -1,7 +1,7 @@
 package gestionParking;
 
 import exception.PlaceDisponibleException;
-import véhicule.Vehicule;
+import vehicule.Vehicule;
 
 public class Place {
 	int numero;
@@ -22,6 +22,11 @@ public class Place {
 	public boolean getEstOccupee()
 	{
 		return this.estOccupee;
+	}
+	
+	public void setEstOccupee(boolean occupee)
+	{
+		estOccupee = occupee;
 	}
 	
 	public String getType()
@@ -56,26 +61,19 @@ public class Place {
 	}
 	
 	public void freePlace (Place place){
-		
 		try {
-			
 			if(place.estReservee){
-				
 				place.setEstReservee(false);
-				
 			}
 			
 			throw new PlaceDisponibleException("Place disponible");
-			
 		}
 		catch (PlaceDisponibleException e){
-			
 			e.printStackTrace();
-			
 		}
 	}
-
+	
 	public boolean getEstReservee() {
-		return estReservee;
+		return this.estReservee;
 	}	
 }
