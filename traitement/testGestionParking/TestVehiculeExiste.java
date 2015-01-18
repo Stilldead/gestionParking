@@ -15,7 +15,6 @@ public class TestVehiculeExiste {
 		Vehicule vehicule = new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx");
 		pk.park(vehicule, 8);
 		assertEquals(true, pk.vehiculeExiste(vehicule));
-		pk = null;
 	}
 	
 	@Test
@@ -26,7 +25,6 @@ public class TestVehiculeExiste {
 		Vehicule vehicule2 = new Vehicule("BMW", "Toto", "Particulier", "xx xyx xx");
 		pk.park(vehicule1, 8);
 		assertEquals(false, pk.vehiculeExiste(vehicule2));
-		pk = null;
 	}
 
 }

@@ -1,5 +1,7 @@
 package gestionParking;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +14,8 @@ public class Parking {
 	static int nombrePlace;
 	static ArrayList<Place> listePlace = new ArrayList();
 	static Parking INSTANCE = null;
+	static int idFacture = 0;
+	
 	
 	public static Parking getInstance()
 	{
@@ -119,6 +123,8 @@ public class Parking {
 			if(vehiculeExiste(listePlace.get(numero_place).getVehicule()) && listePlace.get(numero_place).getEstOccupee()) 
 			{
 				listePlace.get(numero_place).setVehicule(null);
+				facture(vehicule, numero_place);
+				reorganiserPlaces (vehicule, numero_place);
 				return vehicule;
 			}
 			else

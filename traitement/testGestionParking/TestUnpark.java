@@ -21,8 +21,8 @@ public class TestUnpark {
 		Parking pk = new Parking(10);
 		pk.intialiserListe();
 		Vehicule vehicule = new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx");
-		pk.park(vehicule, 6);
-		assertEquals(null, pk.unpark(5));
+		pk.park(vehicule, 5);
+		assertEquals(null, pk.unpark(4));
 	}
 
 }

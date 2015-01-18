@@ -15,7 +15,6 @@ public class TestBookPlace {
 		pk.intialiserListe();
 		pk.park(new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx"), 0);
 		assertEquals(null, pk.bookPlace());
-		pk = null;
 	}
 
 }
