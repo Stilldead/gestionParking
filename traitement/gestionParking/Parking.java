@@ -161,4 +161,36 @@ public class Parking {
 		return unpark(getLocation(numero_immatriculation));	
 	}
 	
+	public void reorganiserPlaces (Vehicule vehicule, int numero_place) {
+		if(vehicule.getType() != "camion" && listePlace.get(numero_place).getType() == "particulier") {
+			for (int i = 0; i < listePlace.size(); ++i) {
+				if (listePlace.get(i).getType() == "transporteur" && listePlace.get(i).getVehicule().getType() != "camion") {
+					park(listePlace.get(i).getVehicule(), numero_place);
+					unpark(listePlace.get(i).getNumero());
+				}
+			}
+		}
+	}
+	
+	public void facture (Vehicule vehicule, int numero_place) {
+		idFacture++;
+		
+		double facture = (Constante.tva / 100) * vehicule.getTarif() + vehicule.getTarif();
+		
+		try{
+			File factureTexte = new File("../../Factures/facture_" + Integer.toString(idFacture) + ".txt");
+			factureTexte.createNewFile();
+			FileWriter ffw = new FileWriter(factureTexte);
+			ffw.write("Facture " + Integer.toString(idFacture) + "\n\n");
+			ffw.write("Numero de place : " + Integer.toString(numero_place) + "\n");
+			ffw.write("Type de place : " + listePlace.get(numero_place).getType() + "\n");
+			ffw.write("Prix HT : " + Double.toString(vehicule.getTarif()) + "\n");
+			ffw.write("Prix TTC : " + Double.toString(facture) + "\n\n");
+			ffw.write("Nous vous remercions de votre visite! A bientot!");
+			ffw.close();
+		} 
+		catch (Exception e) {
+
+		}
+	}
 }

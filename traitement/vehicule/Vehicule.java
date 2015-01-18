@@ -3,6 +3,7 @@ package vehicule;
 public class Vehicule {
 
 	String marque, proprietaire, type, numero_immatriculation;
+	double tarif;
 	
 	public Vehicule(String marqueV, String proprietaireV, String typeV, String numero_immat)
 	{
@@ -27,5 +28,9 @@ public class Vehicule {
 	public String getType()
 	{
 		return type;
+	}
+	
+	public double getTarif() {
+		return tarif;
 	}
 }
