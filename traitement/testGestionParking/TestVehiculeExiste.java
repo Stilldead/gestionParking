@@ -11,7 +11,7 @@ public class TestVehiculeExiste {
 	@Test
 	public void testVehiculeExiste1() throws Exception {
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		Vehicule vehicule = new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx");
 		pk.park(vehicule, 8);
 		assertEquals(true, pk.vehiculeExiste(vehicule));
@@ -20,7 +20,7 @@ public class TestVehiculeExiste {
 	@Test
 	public void testVehiculeExiste2() throws Exception {
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		Vehicule vehicule1 = new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx");
 		Vehicule vehicule2 = new Vehicule("BMW", "Toto", "Particulier", "xx xyx xx");
 		pk.park(vehicule1, 8);

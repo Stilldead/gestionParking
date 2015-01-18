@@ -1,0 +1,8 @@
+Facture 1
+
+Numero de place : 0
+Type de place : Particulier
+Prix HT : 10.0
+Prix TTC : 11.96
+
+Nous vous remercions de votre visite! A bientot!

@@ -3,8 +3,6 @@ package gestionParking;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import exception.PlaceLibreException;
 import exception.PlaceOccupeeException;
 import exception.PlusAucunePlaceException;
@@ -31,7 +29,7 @@ public class Parking {
 		nombrePlace = nbPlace;
 	}
 	
-	public void intialiserListe()
+	public void initialiserListe()
 	{
 		for (int i = 0; i <= nombrePlace ; ++i)
 		{
@@ -95,17 +93,40 @@ public class Parking {
 		}
 	}
 	
-	public Place bookPlace () {
+	public Place bookPlace (Vehicule vehicule) {
 		try {
-			for (int i = 0;i <= listePlace.size() ; ++i) {
-				
-				if (listePlace.get(i).getEstReservee() == false && listePlace.get(i).getEstOccupee() == false) {
-					listePlace.get(i).setEstReservee(true);
-					return listePlace.get(0);
+			if (vehicule.getType() == "Camion")
+			{
+				for (int i = 0;i <= listePlace.size() ; ++i) {
+					
+					if (listePlace.get(i).getEstReservee() == false && listePlace.get(i).getEstOccupee() == false) {
+						listePlace.get(i).setEstReservee(true);
+						listePlace.get(i).setVehicule(vehicule);
+						return listePlace.get(0);
+					}
 				}
+				throw new PlusAucunePlaceException("Plus aucune place Disponible.");
 			}
-			
-			throw new PlusAucunePlaceException("Plus aucune place Disponible.");
+			else
+			{
+				for (int i = 0;i <= listePlace.size() ; ++i) {
+					
+					if (listePlace.get(i).getEstReservee() == false && listePlace.get(i).getEstOccupee() == false && listePlace.get(i).getType() == "Particulier") {
+						listePlace.get(i).setEstReservee(true);
+						listePlace.get(i).setVehicule(vehicule);
+						return listePlace.get(0);
+					}
+				}
+				for (int i = 0;i <= listePlace.size() ; ++i) {
+					
+					if (listePlace.get(i).getEstReservee() == false && listePlace.get(i).getEstOccupee() == false && listePlace.get(i).getType() == "Transporteur") {
+						listePlace.get(i).setEstReservee(true);
+						listePlace.get(i).setVehicule(vehicule);
+						return listePlace.get(0);
+					}
+				}
+				throw new PlusAucunePlaceException("Plus aucune place Disponible.");
+			}
 		}
 		
 		catch(PlusAucunePlaceException e) {
@@ -184,7 +205,7 @@ public class Parking {
 		double facture = (Constante.tva / 100) * vehicule.getTarif() + vehicule.getTarif();
 		
 		try{
-			File factureTexte = new File("../../Factures/facture_" + Integer.toString(idFacture) + ".txt");
+			File factureTexte = new File("facture/facture_" + Integer.toString(idFacture) + ".txt");
 			factureTexte.createNewFile();
 			FileWriter ffw = new FileWriter(factureTexte);
 			ffw.write("Facture " + Integer.toString(idFacture) + "\n\n");
@@ -196,7 +217,7 @@ public class Parking {
 			ffw.close();
 		} 
 		catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }

@@ -12,7 +12,7 @@ public class TestGetLocation {
 	public final void testGetLocation1() throws Exception 
 	{
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		pk.park(new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx"), 5);
 		assertEquals(5, pk.getLocation("xx xxx xx"));
 	}
@@ -21,7 +21,7 @@ public class TestGetLocation {
 	public final void testGetLocation2() throws Exception 
 	{
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		pk.park(new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx"), 5);
 		assertEquals(-1, pk.getLocation("xx xyx xx"));
 	}

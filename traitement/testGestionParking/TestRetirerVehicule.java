@@ -13,7 +13,7 @@ public class TestRetirerVehicule {
 	public final void testRetirerVehicule1() throws Exception 
 	{
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		pk.park(new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx"), 5);
 		assertEquals(true, pk.retirerVehicule("xx xxx xx"));
 	}
@@ -22,7 +22,7 @@ public class TestRetirerVehicule {
 	public final void testRetirerVehicule2() throws Exception 
 	{
 		Parking pk = new Parking(10);
-		pk.intialiserListe();
+		pk.initialiserListe();
 		pk.park(new Vehicule("BMW", "Dupont", "Particulier", "xx xxx xx"), 5);
 		assertEquals(null, pk.retirerVehicule("xx xyx xx"));
 	}
