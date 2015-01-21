@@ -19,7 +19,7 @@ public class Parking {
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new Parking(10);
+			INSTANCE = new Parking(Constante.nombrePlace);
 		}
 		return INSTANCE;
 		
@@ -49,8 +49,6 @@ public class Parking {
 			return false;
 		try	
 		{
-			
-			
 			//Vérifie si la place est occupée et si c'est le bon type de place.
 			if(listePlace.get(numero_place).getEstOccupee() || listePlace.get(numero_place).getType() != vehicule.getType())
 			{

@@ -5,4 +5,6 @@ public class Constante {
 	public static final double tarifMoto = 5;
 	public static final double tarifVoiture = 10;
 	public static final double tarifCamion = 20;
-}
+	public static final int nombrePlace = 20;
+} 
+
